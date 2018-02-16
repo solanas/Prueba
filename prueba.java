@@ -6,62 +6,108 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public static void main(String[] args) throws IOException {
-    	Scanner teclado = new Scanner(System.in);
-    	System.out.println("Escribe ruta/nombre del archivo");
+import java.util.Scanner;
+
+public class CuatroEnRaya {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner teclado = new Scanner(System.in);
+    	String matriz [] []= new String [7] [6];
     	
-        String ruta = teclado.nextLine();
-        teclado.nextLine();
-        File archivo = new File(ruta);
-        
-        //primero compruebo que exista el archivo
-        //y sino lo creo
-        
-        if(archivo.exists()) {
-            System.out.println("El archivo ya estaba creado");
-        } else {
-            
-            System.out.println("Acaba de ser creado el archivo");
-        }
-        
-        //aqui ejecuta el menu para leer o escribir
-        
-        System.out.println("Selecciona 1 para leer del fichero :");
-        System.out.println("Selecciona 2 para escribir del fichero :");
-        int opcion=0;
-        opcion = teclado.nextInt();
-        if(opcion==1) {
-        	leerText(ruta);
-        }else {
-        	escribirText(ruta);
-        }
-        
-        
-    }
-    //aqui estan las funciones de ller y escribir
-    public static void leerText(String ruta) throws IOException {
-    	String sCadena="";
-    	FileReader f = new FileReader(ruta);
-    	BufferedReader bf = new BufferedReader(f);
-        while ((sCadena = bf.readLine())!=null) {
-            System.out.println(sCadena);
-         }
-        bf.close();
-    }
-    public static void escribirText(String ruta) throws IOException {
-    	Scanner teclado = new Scanner(System.in);
-    	File archivo = new File(ruta);
-    	BufferedWriter bw = null;
-    	bw = new BufferedWriter(new FileWriter(archivo));
-    	String frase="52";
-    	teclado.nextLine();
+    	String f1 = "A";
+    	String f2 = "O";
+    	int opc=0;
+    	boolean movedor = true;
+    	String ficha="";
+    	menu();
+    	iniarMatriz(matriz);
+    	
+    	
+    	
     	do {
-    		frase="";
-    		System.out.println("Escribe la frase");
-    		frase=teclado.nextLine();
-    		bw.write(frase);
-    		bw.write("\n");
-    	}while(frase.length()>0);
-    	bw.close();
-    }
+    		if(movedor) {
+    			ficha = f1;
+    			movedor=!movedor;
+    		}else {
+    			ficha = f2;
+    			movedor=!movedor;
+    		}
+    		System.out.println("Escribe numero de columna a colocar ficha");
+    		opc = teclado.nextInt();
+    		matriz=meterCosa(opc, matriz, ficha);
+    		mostrarMatriz(matriz);
+
+    	}while(opc<=6);
+    	
+    	
+    	
+    	
+    	
+	}
+
+	public static void menu() {
+		System.out.println("---Bienvenido al 4 en raya---");
+		//falta po rimplementar modelos de varios jugadores o algo asi
+		
+	}
+	
+	public static  String[][] meterCosa(int fila, String matriz[][],String ficha){
+		boolean debug=true;
+		Scanner teclado = new Scanner(System.in);
+		int i =5;
+		do {
+			if(matriz[fila][i].equals("")&&i>1) {
+				i--;
+				if(debug) {
+					System.out.println("Debug : ");
+					System.out.println("Entra en if : ");
+					teclado.nextLine();
+				}
+			}else {
+				matriz[fila][i++]=ficha;
+				if(debug) {
+					System.out.println("Debug : ");
+					System.out.println("NOO Entra en if : ");
+					teclado.nextLine();
+				}
+				i--;
+			}
+			if(debug) {
+				System.out.println("Debug : ");
+				System.out.println("La i es :  "+i);
+				System.out.println("La ficha es : "+ficha);
+				System.out.println("La posicion en la matriz es : "+matriz[fila][i]);
+				teclado.nextLine();
+			}
+			
+		}while(i>0&&!(matriz[fila][i].equals("")));
+		return (matriz );
+	}
+	
+	public static void mostrarMatriz(String matriz[][]) {
+		//bucle para enseñar matriz
+    	System.out.println("-----------------------------------------------------");
+    	for(int i = 0;i<7;i++) {
+    		System.out.println();
+    		for(int p =0;p<6;p++) {
+    			System.out.print(matriz [i] [p]);
+    			System.out.print("\t ||");
+    		}
+    	}
+    	System.out.println();
+    	System.out.println("-----------------------------------------------------");
+	}
+	
+	public static void iniarMatriz(String matriz[][]) {
+		String vacio = "";
+	   	//rellenamos la matriz vacia
+    	for(int i = 0;i<7;i++) {
+    		for(int p =0;p<6;p++) {
+    			matriz [i] [p] = vacio;
+    		}
+    	}
+	}
+	
+	
 }
