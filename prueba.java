@@ -1,11 +1,3 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-
 import java.util.Scanner;
 
 public class CuatroEnRaya {
@@ -55,33 +47,34 @@ public class CuatroEnRaya {
 	public static  String[][] meterCosa(int fila, String matriz[][],String ficha){
 		boolean debug=true;
 		Scanner teclado = new Scanner(System.in);
-		int i =5;
+		int i =0;
 		do {
-			if(matriz[fila][i].equals("")&&i>1) {
-				i--;
+			if(matriz[6-i][fila].equals("")&&i<5) {
+				matriz[6-i][fila]=ficha;
 				if(debug) {
 					System.out.println("Debug : ");
 					System.out.println("Entra en if : ");
 					teclado.nextLine();
 				}
 			}else {
-				matriz[fila][i++]=ficha;
+				i++;
 				if(debug) {
 					System.out.println("Debug : ");
 					System.out.println("NOO Entra en if : ");
 					teclado.nextLine();
 				}
-				i--;
+				
 			}
+			
 			if(debug) {
 				System.out.println("Debug : ");
 				System.out.println("La i es :  "+i);
 				System.out.println("La ficha es : "+ficha);
-				System.out.println("La posicion en la matriz es : "+matriz[fila][i]);
+				System.out.println("La posicion en la matriz es : "+matriz[6-i][fila]);
 				teclado.nextLine();
 			}
 			
-		}while(i>0&&!(matriz[fila][i].equals("")));
+		}while(i<5&&(matriz[6-i][fila].equals("")));
 		return (matriz );
 	}
 	
