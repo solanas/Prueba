@@ -1,5 +1,19 @@
 import java.util.Scanner;
 
+/*
+ * Aviso importante
+ * he arreglado lo de alinearlos uno encima de otro
+ * falta comprobar si estan en linea y tal
+ * yo recomiendo hacer metodos que lo comprueben
+ * por ejemplo metodo horizontal
+ * metodo vertical y asi....
+ * 
+ * 
+ */
+
+
+
+
 public class CuatroEnRaya {
 
 	public static void main(String[] args) {
@@ -49,11 +63,12 @@ public class CuatroEnRaya {
 		Scanner teclado = new Scanner(System.in);
 		int i =0;
 		do {
-			if(matriz[6-i][fila].equals("")&&i<5) {
+			if(matriz[6-i][fila].equals("")&&i<7) {
 				matriz[6-i][fila]=ficha;
 				if(debug) {
 					System.out.println("Debug : ");
 					System.out.println("Entra en if : ");
+					System.out.println("La i es :  "+i);
 					teclado.nextLine();
 				}
 			}else {
@@ -61,6 +76,7 @@ public class CuatroEnRaya {
 				if(debug) {
 					System.out.println("Debug : ");
 					System.out.println("NOO Entra en if : ");
+					System.out.println("La i es :  "+i);
 					teclado.nextLine();
 				}
 				
@@ -74,7 +90,7 @@ public class CuatroEnRaya {
 				teclado.nextLine();
 			}
 			
-		}while(i<5&&(matriz[6-i][fila].equals("")));
+		}while(i<7&&!(matriz[6-i][fila].equals(ficha)&&(matriz[5-i][fila].equals(""))));
 		return (matriz );
 	}
 	
