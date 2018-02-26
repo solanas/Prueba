@@ -40,8 +40,10 @@ public class CuatroEnRaya {
     			ficha = f2;
     			movedor=!movedor;
     		}
-    		System.out.println("Escribe numero de columna a colocar ficha");
-    		opc = teclado.nextInt();
+    		do {
+    			System.out.println("Escribe numero de columna a colocar ficha");
+        		opc = teclado.nextInt();
+    		}while(opc>=6);
     		matriz=meterCosa(opc, matriz, ficha);
     		mostrarMatriz(matriz);
     		ganar=hasGanado(matriz,ficha);
@@ -61,7 +63,7 @@ public class CuatroEnRaya {
 	}
 	
 	public static  String[][] meterCosa(int fila, String matriz[][],String ficha){
-		boolean debug=true;
+		boolean debug=false;
 		boolean asignado=false;
 		int opc;
 		Scanner teclado = new Scanner(System.in);
@@ -104,7 +106,7 @@ public class CuatroEnRaya {
 			}
 			
 			
-		}while(i<7&&!(matriz[6-i][fila].equals(ficha)&&(matriz[5-i][fila].equals(""))));
+		}while(i<7&&!asignado);
 		if(asignado) {
 			System.out.println("La se ha asignado la ficha ");
 		}else {
@@ -144,7 +146,8 @@ public class CuatroEnRaya {
 		int fichLinea=0;
 		int s=1;
 		boolean sigue=true;
-		boolean debug=true;
+		boolean debug=false;
+		boolean debug1=true;
 		
 		for(int i = 0;i<matriz.length;i++) {
 			for(int p = 0;p<matriz[i].length;p++) {
@@ -172,6 +175,7 @@ public class CuatroEnRaya {
 					if(debug) {
 						System.out.println("Ha salido del primer bucle");
 					}
+					
 					s=0;
 					do {
 						s++;
@@ -200,6 +204,140 @@ public class CuatroEnRaya {
 						System.out.println("En la posicion p  : "+p);
 						System.out.println("Ha contado   : "+fichLinea+" fichas");
 					}
+					if(fichLinea>=3) {
+						hasGanado=true;
+					}
+					
+					
+					
+					//aqui debo seguir comprobando para vertical 
+					
+					fichLinea=0;
+					s=0;
+					do {
+						s++;
+						if(i-s>0) {
+							if(matriz[i-s][p].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug) {
+									System.out.println("Suma a fichLinea hacia abajo");
+								}
+							}else {
+								sigue=false;
+							}
+							if(debug) {
+								System.out.println("No sale del tercer bucle");
+							}
+						}	
+					}while(i-s>0&&sigue&&s<4);
+					if(debug) {
+						System.out.println("Ha salido del tercer bucle");
+					}
+					s=0;
+					do {
+						s++;
+						if(!(i+s>6)) {
+							if(matriz[i+s][p].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug) {
+									System.out.println("Suma a fichLinea hacia arriba");
+								}
+							}else {
+								sigue=false;
+							}
+							if(debug) {
+								System.out.println("No sale del cuarto bucle");
+							}
+						}
+						
+					}while(i+s>5&&sigue&&s<4);
+					if(debug) {
+						System.out.println("Ha salido del cuarto bucle");
+					}
+					if(debug) {
+						System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
+						System.out.println("En la posicion i  : "+i);
+						System.out.println("En la posicion p  : "+p);
+						System.out.println("Ha contado   : "+fichLinea+" fichas");
+					}
+					if(fichLinea>=3) {
+						hasGanado=true;
+					}
+					
+					
+					//aqui compruebo diagonales ,la de abajo a la drch
+					
+					fichLinea=0;
+					s=0;
+					do {
+						s++;
+						if(i+s<6&&p+s<6) {
+							if(matriz[i+s][p+s].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug1) {
+									System.out.println("Suma a fichLinea en quinto bucle");
+								}
+							}else {
+								sigue=false;
+								if(debug1) {
+									System.out.println("Ha salido del quinto bucle");
+								}
+							}
+							
+						}	
+					}while(i+s<=5&&sigue&&s<4&&p+s<=5);
+					
+					if(debug1) {
+						System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
+						System.out.println("En la posicion i  : "+i);
+						System.out.println("En la posicion p  : "+p);
+						System.out.println("Ha contado   :\t\t "+fichLinea+" fichas");
+					}
+					
+					//aqui compruebo la diagonal de arriba a la izq
+					
+					
+					
+					s=0;
+					do {
+						s++;
+						if(i-s>=0&&p-s>=0) {
+							if(matriz[i-s][p-s].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug1) {
+									System.out.println("Suma a fichLinea en sexto bucle");
+								}
+							}else {
+								sigue=false;
+								if(debug1) {
+									System.out.println("Ha salido del sexto bucle");
+								}
+							}
+							
+						}	
+					}while(i-s>0&&sigue&&s<4&&p-s>0);
+					
+					if(debug1) {
+						System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
+						System.out.println("En la posicion i  : "+i);
+						System.out.println("En la posicion p  : "+p);
+						System.out.println("Ha contado   :\t\t "+fichLinea+" fichas");
+					}
+					
+					if(fichLinea>=3) {
+						hasGanado=true;
+					}
+					
+					
+					
+					
+					
+					
+					
 					
 					
 					
