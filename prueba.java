@@ -1,19 +1,5 @@
 import java.util.Scanner;
 
-/*
- * Aviso importante
- * he arreglado lo de alinearlos uno encima de otro
- * falta comprobar si estan en linea y tal
- * yo recomiendo hacer metodos que lo comprueben
- * por ejemplo metodo horizontal
- * metodo vertical y asi....
- * 
- * 
- */
-
-
-
-
 public class CuatroEnRaya {
 
 	public static void main(String[] args) {
@@ -147,7 +133,7 @@ public class CuatroEnRaya {
 		int s=1;
 		boolean sigue=true;
 		boolean debug=false;
-		boolean debug1=true;
+		boolean debug1=false;
 		
 		for(int i = 0;i<matriz.length;i++) {
 			for(int p = 0;p<matriz[i].length;p++) {
@@ -332,6 +318,72 @@ public class CuatroEnRaya {
 						hasGanado=true;
 					}
 					
+					
+
+					//aqui compruebo diagonales ,la de abajo a la drch
+					
+					fichLinea=0;
+					s=0;
+					do {
+						s++;
+						if(i+s<6&&p-s>=0) {
+							if(matriz[i+s][p-s].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug1) {
+									System.out.println("Suma a fichLinea en septimo bucle");
+								}
+							}else {
+								sigue=false;
+								if(debug1) {
+									System.out.println("Ha salido del septimo bucle");
+								}
+							}
+							
+						}	
+					}while(i+s<=5&&sigue&&s<4&&p-s>0);
+					
+					if(debug1) {
+						System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
+						System.out.println("En la posicion i  : "+i);
+						System.out.println("En la posicion p  : "+p);
+						System.out.println("Ha contado   :\t\t "+fichLinea+" fichas");
+					}
+					
+					//aqui compruebo la diagonal de arriba a la izq
+					
+					
+					
+					s=0;
+					do {
+						s++;
+						if(i-s>=0&&p+s<6) {
+							if(matriz[i-s][p+s].equals(ficha)) {
+								fichLinea++;
+								sigue=true;
+								if(debug1) {
+									System.out.println("Suma a fichLinea en octavo bucle");
+								}
+							}else {
+								sigue=false;
+								if(debug1) {
+									System.out.println("Ha salido del octavo bucle");
+								}
+							}
+							
+						}	
+					}while(i-s>0&&sigue&&s<4&&p+s<=5);
+					
+					if(debug1) {
+						System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
+						System.out.println("En la posicion i  : "+i);
+						System.out.println("En la posicion p  : "+p);
+						System.out.println("Ha contado   :\t\t "+fichLinea+" fichas");
+					}
+					
+					if(fichLinea>=3) {
+						hasGanado=true;
+					}
 					
 					
 					
