@@ -28,8 +28,10 @@ public class CuatroEnRaya {
     		}
     		do {
     			System.out.println("Escribe numero de columna a colocar ficha");
+    			System.out.println("Entre 1 y 6");
         		opc = teclado.nextInt();
-    		}while(opc>=6);
+    		}while(opc>6||opc<0);
+    		opc--;
     		matriz=meterCosa(opc, matriz, ficha);
     		mostrarMatriz(matriz);
     		ganar=hasGanado(matriz,ficha);
@@ -106,11 +108,16 @@ public class CuatroEnRaya {
 	
 	public static void mostrarMatriz(String matriz[][]) {
 		//bucle para enseñar matriz
+		System.out.println("-----------------------------------------------------");
+		for(int i = 1;i<=6;i++) {
+			System.out.print(i+"\t ||");
+		}
+		System.out.println();
     	System.out.println("-----------------------------------------------------");
     	for(int i = 0;i<7;i++) {
     		for(int p =0;p<6;p++) {
     			System.out.print(matriz [i] [p]);
-    			System.out.print("\t ||");
+    			System.out.print("\t||");
     		}
     		System.out.println();
     	}
@@ -377,19 +384,15 @@ public class CuatroEnRaya {
 					if(debug1) {
 						System.out.println("Ha salido del septimo bucle");
 					}
-				}
-				
+				}	
 			}	
 		}while(i+s<=5&&sigue&&s<4&&p-s>0);
-		
 		if(debug1) {
 			System.out.println("Ha comprobado la ficha : "+matriz[i][p]);
 			System.out.println("En la posicion i  : "+i);
 			System.out.println("En la posicion p  : "+p);
 			System.out.println("Ha contado   :\t\t "+fichLinea+" fichas");
 		}
-		
-		
 		s=0;
 		do {
 			s++;
